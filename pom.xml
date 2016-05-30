@@ -63,7 +63,7 @@
 			<properties>
 				<logs.level>debug</logs.level>
 				<logs.path>target/logs</logs.path>
-				<database.url>jdbc:mysql://localhost:3306/jee</database.url>
+				<database.url>jdbc:mysql://localhost:3306/cine</database.url>
 				<database.user>root</database.user>
 				<database.password></database.password>
 				<hibernate.hbm2ddl.auto>create</hibernate.hbm2ddl.auto>
@@ -102,7 +102,7 @@
 			<properties>
 				<logs.level>error</logs.level>
 				<logs.path>../logs</logs.path>
-				<database.url>jdbc:mysql://localhost:3306/jee</database.url>
+				<database.url>jdbc:mysql://localhost:3306/cine</database.url>
 				<database.user>root</database.user>
 				<database.password></database.password>
 				<hibernate.hbm2ddl.auto>create</hibernate.hbm2ddl.auto>
