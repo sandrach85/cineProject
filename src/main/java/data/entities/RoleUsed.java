@@ -3,10 +3,10 @@ package data.entities;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -16,7 +16,8 @@ public class RoleUsed {
     @GeneratedValue
     private int id;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn
     private Person person;
     
     @Enumerated(EnumType.STRING)
