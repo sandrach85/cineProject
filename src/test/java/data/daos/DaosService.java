@@ -14,6 +14,7 @@ import data.entities.Role;
 import data.entities.RoleUsed;
 import data.entities.Theme;
 import data.entities.ThemeUsed;
+import data.services.DataService;
 
 
 @Service
@@ -30,6 +31,9 @@ public class DaosService {
     
     @Autowired
     private ThemeUsedDao themeUsedDao;
+    
+    @Autowired
+    private DataService genericService;
             
     @PostConstruct
     public void populate(){
@@ -136,4 +140,7 @@ public class DaosService {
     	return films;
     }
     
+    public void deleteAll() {
+        genericService.deleteAll();
+    }
 }
