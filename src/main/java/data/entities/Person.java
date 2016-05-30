@@ -17,13 +17,13 @@ public class Person {
 
 	private String name;
 	private String nationality;
-	private Calendar birthdate;
+	private String birthdate;
 	
 	
 	public Person() {
 	}
 
-	public Person(String name, String nationality, Calendar birthdate) {
+	public Person(String name, String nationality, String birthdate) {
 		assert name != null && nationality != null && birthdate != null;
 		this.name = name;
 		this.nationality = nationality;
@@ -50,18 +50,17 @@ public class Person {
 		this.nationality = nationality;
 	}
 
-	public Calendar getBirthdate() {
+	public String getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(Calendar birthdate) {
+	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 
 	@Override
 	public String toString() {
-		String date = new SimpleDateFormat("HH:00 dd-MM-yyyy ").format(birthdate.getTime());
-		return "Persona [id=" + id + ", nombre=" + name + ", nacionalidad=" + nationality + ", fecha de nacimiento=" + date
+		return "Persona [id=" + id + ", nombre=" + name + ", nacionalidad=" + nationality + ", fecha de nacimiento=" + birthdate
 				+ "]";
 	}
 	
