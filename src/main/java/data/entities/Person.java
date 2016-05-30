@@ -20,9 +20,14 @@ public class Person {
 	private Calendar birthdate;
 	
 	public Person(String name, String nationality, Calendar birthdate) {
+		assert name != null && nationality != null && birthdate != null;
 		this.name = name;
 		this.nationality = nationality;
 		this.birthdate = birthdate;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -49,13 +54,9 @@ public class Person {
 		this.birthdate = birthdate;
 	}
 
-	public int getId() {
-		return id;
-	}
-
 	@Override
 	public String toString() {
-		String date = new SimpleDateFormat("HH:00 dd-MMM-yyyy ").format(birthdate.getTime());
+		String date = new SimpleDateFormat("HH:00 dd-MM-yyyy ").format(birthdate.getTime());
 		return "Persona [id=" + id + ", nombre=" + name + ", nacionalidad=" + nationality + ", fecha de nacimiento=" + date
 				+ "]";
 	}
