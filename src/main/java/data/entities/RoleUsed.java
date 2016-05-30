@@ -47,6 +47,32 @@ public class RoleUsed {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
+	@Override
+	public int hashCode() {
+		return id;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RoleUsed other = (RoleUsed) obj;
+		if (id != other.id)
+			return false;
+		if (person == null) {
+			if (other.person != null)
+				return false;
+		} else if (!person.equals(other.person))
+			return false;
+		if (role != other.role)
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
