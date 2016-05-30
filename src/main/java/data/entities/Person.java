@@ -54,12 +54,45 @@ public class Person {
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
+	
+	@Override
+	public int hashCode() {
+		return id;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		if (birthdate == null) {
+			if (other.birthdate != null)
+				return false;
+		} else if (!birthdate.equals(other.birthdate))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (nationality == null) {
+			if (other.nationality != null)
+				return false;
+		} else if (!nationality.equals(other.nationality))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + name + ", nacionalidad=" + nationality + ", fecha de nacimiento=" + birthdate
 				+ "]";
 	}
-	
 	
 }
