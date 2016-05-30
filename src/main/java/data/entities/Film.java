@@ -32,6 +32,11 @@ public class Film {
     @Enumerated(EnumType.STRING)
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Theme> theme;
+        
+
+	public Film() {
+		
+	}
 
 	public Film(String title, String country, int year, String argument, List<Person> directors, List<Person> actors,
 			List<Theme> theme) {
