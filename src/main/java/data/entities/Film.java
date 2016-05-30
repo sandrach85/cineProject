@@ -40,7 +40,6 @@ public class Film {
 
 	public Film(String title, String country, int year, String argument, List<Person> directors, List<Person> actors,
 			List<Theme> theme) {
-		super();
 		this.title = title;
 		this.country = country;
 		this.year = year;
@@ -108,6 +107,57 @@ public class Film {
 
 	public void setTheme(List<Theme> theme) {
 		this.theme = theme;
+	}
+	
+	@Override
+	public int hashCode() {
+		return id;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Film other = (Film) obj;
+		if (actors == null) {
+			if (other.actors != null)
+				return false;
+		} else if (!actors.equals(other.actors))
+			return false;
+		if (argument == null) {
+			if (other.argument != null)
+				return false;
+		} else if (!argument.equals(other.argument))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (directors == null) {
+			if (other.directors != null)
+				return false;
+		} else if (!directors.equals(other.directors))
+			return false;
+		if (id != other.id)
+			return false;
+		if (theme == null) {
+			if (other.theme != null)
+				return false;
+		} else if (!theme.equals(other.theme))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (year != other.year)
+			return false;
+		return true;
 	}
 
 	@Override
