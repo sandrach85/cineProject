@@ -3,8 +3,6 @@ package data.entities;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,24 +27,17 @@ public class Film {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Person> actors;
     
-    @Enumerated(EnumType.STRING)
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Theme> theme;
-        
-
 	public Film() {
 		
 	}
 
-	public Film(String title, String country, int year, String argument, List<Person> directors, List<Person> actors,
-			List<Theme> theme) {
+	public Film(String title, String country, int year, String argument, List<Person> directors, List<Person> actors) {
 		this.title = title;
 		this.country = country;
 		this.year = year;
 		this.argument = argument;
 		this.directors = directors;
 		this.actors = actors;
-		this.theme = theme;
 	}
 
 	public int getId() {
@@ -101,14 +92,6 @@ public class Film {
 		this.actors = actors;
 	}
 
-	public List<Theme> getTheme() {
-		return theme;
-	}
-
-	public void setTheme(List<Theme> theme) {
-		this.theme = theme;
-	}
-	
 	@Override
 	public int hashCode() {
 		return id;
@@ -145,11 +128,6 @@ public class Film {
 			return false;
 		if (id != other.id)
 			return false;
-		if (theme == null) {
-			if (other.theme != null)
-				return false;
-		} else if (!theme.equals(other.theme))
-			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
@@ -163,7 +141,7 @@ public class Film {
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", title=" + title + ", country=" + country + ", year=" + year + ", argument="
-				+ argument + ", directors=" + directors + ", actors=" + actors + ", theme=" + theme + "]";
+				+ argument + ", directors=" + directors + ", actors=" + actors + "]";
 	}
 
 
