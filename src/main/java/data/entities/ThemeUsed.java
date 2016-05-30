@@ -16,14 +16,14 @@ public class ThemeUsed {
     private int id;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    private Person person;
+    private Film film;
     
     @Enumerated(EnumType.STRING)
     private Theme theme;
 
-	public ThemeUsed(Person person, Theme theme) {
-		assert person != null && theme != null;
-		this.person = person;
+	public ThemeUsed(Film film, Theme theme) {
+		assert film != null && theme != null;
+		this.film = film;
 		this.theme = theme;
 	}
 	
@@ -31,12 +31,12 @@ public class ThemeUsed {
 		return id;
 	}
     
-	public Person getPerson() {
-		return person;
+	public Film getFilm() {
+		return film;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setFilm(Film film) {
+		this.film = film;
 	}
 
 	public Theme getTheme() {
@@ -63,10 +63,10 @@ public class ThemeUsed {
 		ThemeUsed other = (ThemeUsed) obj;
 		if (id != other.id)
 			return false;
-		if (person == null) {
-			if (other.person != null)
+		if (film == null) {
+			if (other.film != null)
 				return false;
-		} else if (!person.equals(other.person))
+		} else if (!film.equals(other.film))
 			return false;
 		if (theme != other.theme)
 			return false;
@@ -75,7 +75,7 @@ public class ThemeUsed {
 
 	@Override
 	public String toString() {
-		return "ThemeUsed [id=" + id + ", person=" + person + ", theme=" + theme + "]";
+		return "ThemeUsed [id=" + id + ", film=" + film + ", theme=" + theme + "]";
 	}
   
 }
