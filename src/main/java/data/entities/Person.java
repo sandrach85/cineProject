@@ -19,9 +19,7 @@ public class Person {
 	private String nationality;
 	private Calendar birthdate;
 	
-	public Person(int id, String name, String nationality, Calendar birthdate) {
-		super();
-		this.id = id;
+	public Person(String name, String nationality, Calendar birthdate) {
 		this.name = name;
 		this.nationality = nationality;
 		this.birthdate = birthdate;
