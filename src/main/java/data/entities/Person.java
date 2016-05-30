@@ -19,6 +19,10 @@ public class Person {
 	private String nationality;
 	private Calendar birthdate;
 	
+	
+	public Person() {
+	}
+
 	public Person(String name, String nationality, Calendar birthdate) {
 		assert name != null && nationality != null && birthdate != null;
 		this.name = name;
