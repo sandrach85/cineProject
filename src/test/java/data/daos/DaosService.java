@@ -98,10 +98,10 @@ public class DaosService {
     	return listDirectors;
     }
     
-    private List<Person> addDirector(int id1){
-    	List<Person> listDirectors = new ArrayList<Person>();
-    	listDirectors.add(personDao.findById(id1)); 	
-    	return listDirectors;
+    private List<Person> addDirector(int id){
+    	List<Person> listDirector = new ArrayList<Person>();
+    	listDirector.add(personDao.findById(id)); 	
+    	return listDirector;
     }
     
     public Film[] createFilms(){
