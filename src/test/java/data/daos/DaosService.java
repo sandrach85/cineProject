@@ -39,6 +39,8 @@ public class DaosService {
     public void populate(){
     	this.createPersons();
     	this.createFilms();
+    	this.createDirectorsInFilms();
+    	this.createActorsInFilms();
     }
     
     public Person[] createPersons(){
@@ -139,6 +141,39 @@ public class DaosService {
     	themeUsedDao.save(new ThemeUsed(films[8],Theme.ACTION));
     	return films;
     }
+    
+    public void createDirectorsInFilms(){
+        List<Film> films = filmDao.findAll();
+        films.get(0).addDirectorInFilm(personDao.findById(1));
+        /*films.get(0).setDirectors(addDirector(1));
+        films.get(1).setDirectors(addDirector(10));
+        films.get(2).setDirectors(addDirector(6));
+        films.get(3).setDirectors(addDirector(9));
+        films.get(4).setDirectors(addDirector(8));
+        films.get(5).setDirectors(addDirectors(8, 1));
+        films.get(6).setDirectors(addDirector(10));
+        films.get(7).setDirectors(addDirectors(9, 11));
+        films.get(8).setDirectors(addDirector(11));*/
+        filmDao.save(films);
+    }
+    
+   public void createActorsInFilms(){
+        List<Film> films = filmDao.findAll();
+        films.get(0).addActorInFilm(personDao.findById(1));
+        films.get(0).addActorInFilm(personDao.findById(2));
+        films.get(0).addActorInFilm(personDao.findById(3));
+        /*films.get(0).setDirectors(addActors(1, 2, 3));
+        films.get(1).setDirectors(addActors(3, 4, 5));
+        films.get(2).setDirectors(addActors(6, 7, 4));
+        films.get(3).setDirectors(addActors(3, 7, 5));
+        films.get(4).setDirectors(addActors(3, 4, 5));
+        films.get(5).setDirectors(addActors(4, 7, 6));
+        films.get(6).setDirectors(addActors(5, 7, 6));
+        films.get(7).setDirectors(addActors(3, 4, 5));
+        films.get(8).setDirectors(addActors(7, 4, 5));*/
+        filmDao.save(films);
+    }
+    
     
     public void deleteAll() {
         genericService.deleteAll();
