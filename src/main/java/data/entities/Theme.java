@@ -6,5 +6,4 @@ public enum Theme {
 	public String themeName() {
         return "THEME_" + this.toString();
     }
-
 }
