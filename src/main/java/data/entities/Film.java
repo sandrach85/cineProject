@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
@@ -29,8 +30,8 @@ public class Film {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Person> actors;
     
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Theme> themes;
+    //@OneToMany(fetch = FetchType.EAGER)
+    //private List<Theme> themes;
 
 	public Film(int id, String title, String country, int year, String argument) {
 		super();
@@ -41,7 +42,7 @@ public class Film {
 		this.argument = argument;
 		this.actors = new ArrayList<Person>();
 		this.directors = new ArrayList<Person>();
-		this.themes = new ArrayList<Theme>();
+		//this.themes = new ArrayList<Theme>();
 	}
 
 	public int getId() {
@@ -100,13 +101,13 @@ public class Film {
 		this.actors = actors;
 	}
 
-	public List<Theme> getThemes() {
+	/*public List<Theme> getThemes() {
 		return themes;
 	}
 
 	public void setThemes(List<Theme> themes) {
 		this.themes = themes;
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
@@ -117,7 +118,7 @@ public class Film {
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((directors == null) ? 0 : directors.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((themes == null) ? 0 : themes.hashCode());
+		//result = prime * result + ((themes == null) ? 0 : themes.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + year;
 		return result;
@@ -154,11 +155,11 @@ public class Film {
 			return false;
 		if (id != other.id)
 			return false;
-		if (themes == null) {
+		/*if (themes == null) {
 			if (other.themes != null)
 				return false;
 		} else if (!themes.equals(other.themes))
-			return false;
+			return false;*/
 		if (title == null) {
 			if (other.title != null)
 				return false;
@@ -172,10 +173,10 @@ public class Film {
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", title=" + title + ", country=" + country + ", year=" + year + ", argument="
-				+ argument + ", directors=" + directors + ", actors=" + actors + ", themes=" + themes + "]";
+				+ argument + ", directors=" + directors + ", actors=" + actors + /*", themes=" + themes +*/ "]";
 	}
 	
-	public boolean addTheme(Theme theme){
+	/*public boolean addTheme(Theme theme){
 		boolean result = false;
 		if(!hasTheme(theme)){
 			result = themes.add(theme);
@@ -189,11 +190,11 @@ public class Film {
 			}
 		}
 		return false;
-	}
+	}*/
 	
     public boolean addActor(Person actor){
     	boolean result = false;
-    	if(!isActor(actor) && actor.hasRole(Role.ACTOR)){
+    	if(!isActor(actor) /*&& actor.hasRole(Role.ACTOR)*/){
     		result = actors.add(actor);
     	}
     	return result;
@@ -210,7 +211,7 @@ public class Film {
     
     public boolean addDirector(Person director){
     	boolean result = false;
-    	if(!isDirector(director) && director.hasRole(Role.DIRECTOR)){
+    	if(!isDirector(director) /*&& director.hasRole(Role.DIRECTOR)*/){
     		result = directors.add(director);
     	}
     	return result;

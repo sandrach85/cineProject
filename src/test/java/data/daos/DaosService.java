@@ -16,8 +16,6 @@ import data.services.DataService;
 @Service
 public class DaosService {
 	
-    @Autowired
-    private FilmDao filmDao;
     
     @Autowired
     private PersonDao personDao;

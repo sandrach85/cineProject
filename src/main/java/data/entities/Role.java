@@ -4,7 +4,7 @@ public enum Role {
 	DIRECTOR, ACTOR;
 	
 	public String roleName() {
-        return "ROLE_" + this.toString();
+        return this.toString();
     }
 
 }

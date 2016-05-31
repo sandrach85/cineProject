@@ -22,20 +22,22 @@ public class Person {
 	
 	private final int MAX_ROLES = 2;
 	
+	
 	@OneToMany(fetch = FetchType.EAGER)
-	private List<Role> roles;
+	private List<String> roles;
 	
 	
 	public Person() {
 	}
 
-	public Person(String name, String nationality, String birthdate, List<Role> roles) {
+	public Person(String name, String nationality, String birthdate, List<Role> rolesList) {
 		assert name != null && nationality != null && birthdate != null;
 		this.name = name;
 		this.nationality = nationality;
 		this.birthdate = birthdate;
-		this.roles = roles;
-		
+		for(int i=0; i<roles.size();i++){
+			this.roles.add(rolesList.get(i).roleName());
+		}
 	}
 
 	public int getId() {
@@ -66,12 +68,8 @@ public class Person {
 		this.birthdate = birthdate;
 	}
 
-	public List<Role> getRoles() {
+	public List<String> getRoles() {
 		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
 	}
 
 	@Override
@@ -123,20 +121,20 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", name=" + name + ", nationality=" + nationality + ", birthdate=" + birthdate
-				+ ", roles=" + roles + "]";
+				+ ", roles=" + roles +  "]";
 	}
 	
 	public boolean addRole(Role role){
 		boolean result = false;
 		if(roles.size()<MAX_ROLES && !hasRole(role)){
-			roles.add(role);
+			roles.add(role.roleName());
 		}
 		return result;
 	}
 
 	public boolean hasRole(Role role) {
 		for(int i = 0; i< roles.size(); i++){
-			if(roles.get(i).equals(role)){
+			if(roles.get(i).equals(role.roleName())){
 				return true;
 			}
 		}
