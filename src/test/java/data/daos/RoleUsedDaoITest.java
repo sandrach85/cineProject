@@ -29,8 +29,8 @@ public class RoleUsedDaoITest {
     
     @Test
     public void testFindRoleByPerson() {
-        List<Role> roles = roleUsedDao.findRoleByPerson(personDao.findById(0));
-        assertEquals(1, roles.size());
-        assertEquals(Role.ACTOR, roles.get(0));
+        List<Role> roles = roleUsedDao.findRoleByPerson(personDao.findById(1));
+        assertEquals(2, roles.size());
+        assertEquals(Role.DIRECTOR, roles.get(0));
     }
 }
