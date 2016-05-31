@@ -24,7 +24,7 @@ public class PersonDaoITest {
     
     @Test
     public void testFindById() {
-        Person person = personDao.findById(0);
+        Person person = personDao.findById(1);
         assertEquals("Ben Affleck", person.getName());
     }
 }
