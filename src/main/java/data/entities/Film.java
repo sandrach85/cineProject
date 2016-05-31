@@ -140,6 +140,14 @@ public class Film {
 		return true;
 	}
 
+	public void addDirectorInFilm(Person direc){
+		this.directors.add(direc);
+	}
+	
+	public void addActorInFilm(Person actor){
+		this.actors.add(actor);
+	}
+	
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", title=" + title + ", country=" + country + ", year=" + year + ", argument="
