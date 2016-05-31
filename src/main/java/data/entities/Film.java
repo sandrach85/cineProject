@@ -1,5 +1,6 @@
 package data.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -28,16 +29,17 @@ public class Film {
     private List<Person> actors;
     
 	public Film() {
-		
+		this.directors = new ArrayList<Person>();
+		this.actors = new ArrayList<Person>();
 	}
 
-	public Film(String title, String country, int year, String argument, List<Person> directors, List<Person> actors) {
+	public Film(String title, String country, int year, String argument) {
 		this.title = title;
 		this.country = country;
 		this.year = year;
 		this.argument = argument;
-		this.directors = directors;
-		this.actors = actors;
+		this.directors = new ArrayList<Person>();
+		this.actors = new ArrayList<Person>();
 	}
 
 	public int getId() {
