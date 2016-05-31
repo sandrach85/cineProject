@@ -31,13 +31,11 @@ public class Film {
 		
 	}
 
-	public Film(String title, String country, int year, String argument, List<Person> directors, List<Person> actors) {
-		this.title = title;
+	public Film(String title, String country, int year, String argument){
+	    this.title = title;
 		this.country = country;
 		this.year = year;
 		this.argument = argument;
-		this.directors = directors;
-		this.actors = actors;
 	}
 
 	public int getId() {
