@@ -7,17 +7,15 @@ import javax.persistence.Id;
 
 @Entity
 public class Person {
-	
-	
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
 	private String name;
 	private String nationality;
 	private String birthdate;
-	
-	
+
 	public Person() {
 	}
 
@@ -55,7 +53,7 @@ public class Person {
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return id;
@@ -92,8 +90,8 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + name + ", nacionalidad=" + nationality + ", fecha de nacimiento=" + birthdate
-				+ "]";
+		return "Persona [id=" + id + ", nombre=" + name + ", nacionalidad=" + nationality + ", fecha de nacimiento="
+				+ birthdate + "]";
 	}
-	
+
 }

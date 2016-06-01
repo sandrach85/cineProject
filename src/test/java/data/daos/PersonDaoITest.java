@@ -13,18 +13,18 @@ import config.TestsPersistenceConfig;
 import data.entities.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
+@ContextConfiguration(classes = { PersistenceConfig.class, TestsPersistenceConfig.class })
 public class PersonDaoITest {
 
-    @Autowired
-    private PersonDao personDao;
-    
-    @Autowired
-    private DaosService daosService;
-    
-    @Test
-    public void testFindById() {
-        Person person = personDao.findById(1);
-        assertEquals("Ben Affleck", person.getName());
-    }
+	@Autowired
+	private PersonDao personDao;
+
+	@Autowired
+	private DaosService daosService;
+
+	@Test
+	public void testFindById() {
+		Person person = personDao.findById(1);
+		assertEquals("Ben Affleck", person.getName());
+	}
 }

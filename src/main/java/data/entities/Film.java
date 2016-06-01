@@ -9,25 +9,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-
 @Entity
 public class Film {
-	
-    @Id
-    @GeneratedValue
-    private int id;
-    
-    private String title;
-    private String country;
-    private int year;
-    private String argument;
-    
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Person> directors;
-        
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Person> actors;
-    
+
+	@Id
+	@GeneratedValue
+	private int id;
+
+	private String title;
+	private String country;
+	private int year;
+	private String argument;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Person> directors;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Person> actors;
+
 	public Film() {
 		this.directors = new ArrayList<Person>();
 		this.actors = new ArrayList<Person>();
@@ -45,7 +44,7 @@ public class Film {
 	public int getId() {
 		return id;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -140,26 +139,22 @@ public class Film {
 		return true;
 	}
 
-	public void addDirectorInFilm(Person direc){
-		System.out.println(this.directors+ "Estoy en addDirectorsInFilm");
+	public void addDirectorInFilm(Person direc) {
+		System.out.println(this.directors + "Estoy en addDirectorsInFilm");
 		this.directors.add(direc);
 		System.out.println(this.directors);
 	}
-	
-	public void addActorInFilm(Person actor){
+
+	public void addActorInFilm(Person actor) {
 		System.out.println(this.actors + "Estoy en addActorsInFilm");
 		this.actors.add(actor);
 		System.out.println(this.actors);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", title=" + title + ", country=" + country + ", year=" + year + ", argument="
 				+ argument + ", directors=" + directors + ", actors=" + actors + "]";
 	}
-
-
-    
-    
 
 }
