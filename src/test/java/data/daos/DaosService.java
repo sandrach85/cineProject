@@ -85,20 +85,28 @@ public class DaosService {
     	return persons;
     }
     
-    private List<Person> addActors(int id1, int id2, int id3){
+  /*  private List<Person> addActors(int id1, int id2, int id3){
     	List<Person> listActors = new ArrayList<Person>();
     	listActors.add(personDao.findById(id1));
     	listActors.add(personDao.findById(id2));
     	listActors.add(personDao.findById(id3));    	
     	return listActors;
-    }
+    }*/
     
-    private List<Person> addDirectors(int id1, int id2){
+/*    public Film addActorsInFilm(int id1, int id2, int id3, int idf){
+    	Film film = filmDao.findById(idf);
+    	List<Person> actors = addActors(id1, id2, id3);
+    	film.setActors(actors);
+    	filmDao.save(film);
+    	return film;
+    }*/
+    
+ /*   private List<Person> addDirectors(int id1, int id2){
     	List<Person> listDirectors = new ArrayList<Person>();
     	listDirectors.add(personDao.findById(id1));
     	listDirectors.add(personDao.findById(id2));   	
     	return listDirectors;
-    }
+    }*/
     
     private List<Person> addDirector(int id){
     	List<Person> listDirector = new ArrayList<Person>();
@@ -110,33 +118,42 @@ public class DaosService {
     	Film[] films = new Film[9];
     	films[0] = new Film("Pearl Harbour","EEUU",2001,"argumento de la pelicula");
     	filmDao.save(films[0]);
+    	System.out.println(films[0]);
     	themeUsedDao.save(new ThemeUsed(films[0],Theme.ACTION));
     	themeUsedDao.save(new ThemeUsed(films[0],Theme.ADVENTURE));
     	films[1] = new Film("Argo","EEUU",2012,"argumento de la pelicula");
     	filmDao.save(films[1]);
+    	System.out.println(films[1]);
     	themeUsedDao.save(new ThemeUsed(films[1],Theme.ACTION));
     	themeUsedDao.save(new ThemeUsed(films[1],Theme.ADVENTURE));
     	films[2] = new Film("Altamira","España",2016,"argumento de la pelicula");
     	filmDao.save(films[2]);
+    	System.out.println(films[2]);
     	themeUsedDao.save(new ThemeUsed(films[2],Theme.ADVENTURE));
     	films[3] = new Film("El camino de los ingleses","EEUU",2006,"argumento de la pelicula");
     	filmDao.save(films[3]);
+    	System.out.println(films[3]);
     	themeUsedDao.save(new ThemeUsed(films[3],Theme.LOVE));
     	themeUsedDao.save(new ThemeUsed(films[3],Theme.ADVENTURE));
     	films[4] = new Film("A todo gas","EEUU",2001,"argumento de la pelicula");
     	filmDao.save(films[4]);
+    	System.out.println(films[4]);
     	themeUsedDao.save(new ThemeUsed(films[4],Theme.ACTION));
     	films[5] = new Film("Alvin y las Ardillas","EEUU",2007,"argumento de la pelicula");
     	filmDao.save(films[5]);
+    	System.out.println(films[5]);
     	themeUsedDao.save(new ThemeUsed(films[5],Theme.HUMOR));
     	films[6] = new Film("American Pie","EEUU",1999,"argumento de la pelicula");
     	filmDao.save(films[6]);
+    	System.out.println(films[6]);
     	themeUsedDao.save(new ThemeUsed(films[6],Theme.HUMOR));
     	films[7] = new Film("Anastasia","EEUU",1997,"argumento de la pelicula");
     	filmDao.save(films[7]);
+    	System.out.println(films[7]);
     	themeUsedDao.save(new ThemeUsed(films[7],Theme.HUMOR));
     	films[8] = new Film("Ahora me ves","EEUU",1997,"argumento de la pelicula");
     	filmDao.save(films[8]);
+    	System.out.println(films[8]);
     	themeUsedDao.save(new ThemeUsed(films[8],Theme.TERROR));
     	themeUsedDao.save(new ThemeUsed(films[8],Theme.ACTION));
     	return films;
@@ -144,24 +161,45 @@ public class DaosService {
     
     public void createDirectorsInFilms(){
         List<Film> films = filmDao.findAll();
-        films.get(0).addDirectorInFilm(personDao.findById(1));
-        /*films.get(0).setDirectors(addDirector(1));
-        films.get(1).setDirectors(addDirector(10));
-        films.get(2).setDirectors(addDirector(6));
-        films.get(3).setDirectors(addDirector(9));
-        films.get(4).setDirectors(addDirector(8));
-        films.get(5).setDirectors(addDirectors(8, 1));
-        films.get(6).setDirectors(addDirector(10));
-        films.get(7).setDirectors(addDirectors(9, 11));
-        films.get(8).setDirectors(addDirector(11));*/
-        filmDao.save(films);
+        System.out.println("Estoy en createDirectorsInFilm");
+    	System.out.println(films);
+    	films.get(0).addDirectorInFilm(personDao.findById(1));
+    	System.out.println(films.get(0));
+    	filmDao.save(films.get(0));
+        films.get(1).addDirectorInFilm(personDao.findById(10));
+    	System.out.println(films.get(1));
+        films.get(2).addDirectorInFilm(personDao.findById(6));
+    	System.out.println(films.get(2));
+        films.get(3).addDirectorInFilm(personDao.findById(9));
+    	System.out.println(films.get(3));
+        films.get(4).addDirectorInFilm(personDao.findById(6));
+    	System.out.println(films.get(4));
+        films.get(5).addDirectorInFilm(personDao.findById(11));
+    	System.out.println(films.get(5));
+        films.get(5).addDirectorInFilm(personDao.findById(1));
+    	System.out.println(films.get(5));
+        films.get(6).addDirectorInFilm(personDao.findById(10));
+    	System.out.println(films.get(6));
+        films.get(7).addDirectorInFilm(personDao.findById(9));
+    	System.out.println(films.get(7));
+        films.get(7).addDirectorInFilm(personDao.findById(11));
+    	System.out.println(films.get(7));
+        films.get(8).addDirectorInFilm(personDao.findById(11));
+    	System.out.println(films.get(8));
+        //filmDao.save(films);
+    	System.out.println("salvando directores en pelis");
     }
     
    public void createActorsInFilms(){
         List<Film> films = filmDao.findAll();
-        films.get(0).addActorInFilm(personDao.findById(1));
+        System.out.println("Estoy en createActorsInFilms");
+    	System.out.println(films);
         films.get(0).addActorInFilm(personDao.findById(2));
+    	System.out.println(films.get(0));
+        films.get(0).addActorInFilm(personDao.findById(4));
+    	System.out.println(films.get(0));
         films.get(0).addActorInFilm(personDao.findById(3));
+    	System.out.println(films.get(0));
         /*films.get(0).setDirectors(addActors(1, 2, 3));
         films.get(1).setDirectors(addActors(3, 4, 5));
         films.get(2).setDirectors(addActors(6, 7, 4));
