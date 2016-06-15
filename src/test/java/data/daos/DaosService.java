@@ -1,17 +1,14 @@
 package data.daos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import data.entities.Direction;
 import data.entities.Film;
+import data.entities.Interpretation;
 import data.entities.Person;
-import data.entities.Role;
-import data.entities.RoleUsed;
 import data.entities.Theme;
 import data.entities.ThemeUsed;
 import data.services.DataService;
@@ -24,9 +21,12 @@ public class DaosService {
 
 	@Autowired
 	private PersonDao personDao;
-
+	
 	@Autowired
-	private RoleUsedDao roleUsedDao;
+	private DirectionDao directorDao;
+	
+	@Autowired
+	private InterpretationDao actorDao;
 
 	@Autowired
 	private ThemeUsedDao themeUsedDao;
@@ -38,79 +38,131 @@ public class DaosService {
 	public void populate() {
 		this.createPersons();
 		this.createFilms();
-		this.createDirectorsInFilms();
-		this.createActorsInFilms();
+		this.addDirectors();
+		this.addActors();
+		this.addDirectorInFilm();
+		this.addActorsInFilm();
 	}
 
 	public Person[] createPersons() {
 		Person[] persons = new Person[11];
+		createDirectors();
+		createActors();
 		persons[0] = new Person("Ben Affleck", "EEUU", "15-08-1972");
 		personDao.save(persons[0]);
-		roleUsedDao.save(new RoleUsed(persons[0], Role.DIRECTOR));
-		roleUsedDao.save(new RoleUsed(persons[0], Role.ACTOR));
 		persons[1] = new Person("Sasha Grey", "EEUU", "14-03-1988");
 		personDao.save(persons[1]);
-		roleUsedDao.save(new RoleUsed(persons[1], Role.ACTOR));
 		persons[2] = new Person("Chloë Grace Moretz", "EEUU", "10-02-1997");
 		personDao.save(persons[2]);
-		roleUsedDao.save(new RoleUsed(persons[2], Role.ACTOR));
 		persons[3] = new Person("Mario Casas", "España", "12-06-1986");
 		personDao.save(persons[3]);
-		roleUsedDao.save(new RoleUsed(persons[3], Role.ACTOR));
 		persons[4] = new Person("Chris Evans", "EEUU", "13-06-1981");
 		personDao.save(persons[4]);
-		roleUsedDao.save(new RoleUsed(persons[4], Role.ACTOR));
 		persons[5] = new Person("Antonio Banderas", "España", "10-08-1960");
 		personDao.save(persons[5]);
-		roleUsedDao.save(new RoleUsed(persons[5], Role.DIRECTOR));
-		roleUsedDao.save(new RoleUsed(persons[5], Role.ACTOR));
 		persons[6] = new Person("Quentin Tarantino", "EEUU", "27-03-1963");
 		personDao.save(persons[6]);
-		roleUsedDao.save(new RoleUsed(persons[6], Role.DIRECTOR));
-		roleUsedDao.save(new RoleUsed(persons[6], Role.ACTOR));
 		persons[7] = new Person("Martin Scorsese", "EEUU", "17-11-1942");
 		personDao.save(persons[7]);
-		roleUsedDao.save(new RoleUsed(persons[7], Role.DIRECTOR));
-		roleUsedDao.save(new RoleUsed(persons[7], Role.ACTOR));
 		persons[8] = new Person("Steven Spielberg", "EEUU", "18-12-1946");
 		personDao.save(persons[8]);
-		roleUsedDao.save(new RoleUsed(persons[8], Role.DIRECTOR));
 		persons[9] = new Person("Tim Burton", "EEUU", "25-08-1958");
 		personDao.save(persons[9]);
-		roleUsedDao.save(new RoleUsed(persons[9], Role.DIRECTOR));
 		persons[10] = new Person("Alfred Hitchcock", "Reino Unido", "13-08-1899");
 		personDao.save(persons[10]);
-		roleUsedDao.save(new RoleUsed(persons[10], Role.DIRECTOR));
 		return persons;
 	}
-
-	/*
-	 * private List<Person> addActors(int id1, int id2, int id3){ List<Person>
-	 * listActors = new ArrayList<Person>();
-	 * listActors.add(personDao.findById(id1));
-	 * listActors.add(personDao.findById(id2));
-	 * listActors.add(personDao.findById(id3)); return listActors; }
-	 */
-
-	/*
-	 * public Film addActorsInFilm(int id1, int id2, int id3, int idf){ Film
-	 * film = filmDao.findById(idf); List<Person> actors = addActors(id1, id2,
-	 * id3); film.setActors(actors); filmDao.save(film); return film; }
-	 */
-
-	/*
-	 * private List<Person> addDirectors(int id1, int id2){ List<Person>
-	 * listDirectors = new ArrayList<Person>();
-	 * listDirectors.add(personDao.findById(id1));
-	 * listDirectors.add(personDao.findById(id2)); return listDirectors; }
-	 */
-
-	private List<Person> addDirector(int id) {
-		List<Person> listDirector = new ArrayList<Person>();
-		listDirector.add(personDao.findById(id));
-		return listDirector;
+	
+	private void createDirectors(){
+		for(int i =0; i<11; i++){
+			Direction director = new Direction();
+			directorDao.save(director);
+		}
+	}
+	
+	private void createActors(){
+		for(int i =0; i<11; i++){
+			Interpretation actor = new Interpretation();
+			actorDao.save(actor);
+		}
+	}
+	
+	private void asignDirectors(int idP, int idD){
+		Person person = personDao.findById(idP);
+		person.setDirector(directorDao.findById(idD));
+		personDao.save(person);
+	}
+	
+	private void asignActors(int idP, int idA){
+		Person person = personDao.findById(idP);
+		person.setActor(actorDao.findById(idA));
+		personDao.save(person);
+	}
+	
+	private void asignDirectorInFilm(int idP, int id){
+		Film film = filmDao.findById(idP);
+		film.addDirectorInFilm((directorDao.findById(id)));
+		filmDao.save(film);
+	}
+	
+	private void asignActorsInFilm(int idP, int id1, int id2, int id3){
+		Film film = filmDao.findById(idP);
+		film.addActorInFilm((actorDao.findById(id1)));
+		film.addActorInFilm((actorDao.findById(id2)));
+		film.addActorInFilm((actorDao.findById(id3)));
+		filmDao.save(film);
+	}
+	
+	public void addDirectors(){
+		asignDirectors(1, 1);
+		asignDirectors(5, 2);
+		asignDirectors(7, 3);
+		asignDirectors(8, 4);
+		asignDirectors(9, 5);
+		asignDirectors(10, 6);
+		asignDirectors(11, 7);
+	}
+	
+	public void addActors(){
+		asignActors(1, 1);
+		asignActors(2, 2);
+		asignActors(3, 3);
+		asignActors(4, 4);
+		asignActors(5, 5);
+		asignActors(6, 6);
+		asignActors(7, 7);
+		asignActors(8, 8);
+	}
+	
+	public void addDirectorInFilm(){
+		asignDirectorInFilm(1, 1);
+		asignDirectorInFilm(1, 5);
+		asignDirectorInFilm(2, 7);
+		asignDirectorInFilm(3, 8);
+		asignDirectorInFilm(4, 9);
+		asignDirectorInFilm(4, 10);
+		asignDirectorInFilm(5, 11);
+		asignDirectorInFilm(6, 1);
+		asignDirectorInFilm(7, 5);
+		asignDirectorInFilm(8, 7);
+		asignDirectorInFilm(8, 8);
+		asignDirectorInFilm(9, 11);
+	}
+	
+	
+	public void addActorsInFilm(){
+		asignActorsInFilm(1, 1, 2, 3);
+		asignActorsInFilm(2, 2, 3, 4);
+		asignActorsInFilm(3, 3, 4, 5);
+		asignActorsInFilm(4, 5, 6, 7);
+		asignActorsInFilm(5, 6, 7, 8);
+		asignActorsInFilm(6, 7, 8, 1);
+		asignActorsInFilm(7, 8, 1, 2);
+		asignActorsInFilm(8, 2, 4, 6);
+		asignActorsInFilm(9, 1, 3, 5);
 	}
 
+	
 	public Film[] createFilms() {
 		Film[] films = new Film[9];
 		films[0] = new Film("Pearl Harbour", "EEUU", 2001, "argumento de la pelicula");
@@ -156,60 +208,7 @@ public class DaosService {
 		return films;
 	}
 
-	public void createDirectorsInFilms() {
-		List<Film> films = filmDao.findAll();
-		System.out.println("Estoy en createDirectorsInFilm");
-		System.out.println(films);
-		films.get(0).addDirectorInFilm(personDao.findById(1));
-		System.out.println(films.get(0));
-		filmDao.save(films.get(0));
-		films.get(1).addDirectorInFilm(personDao.findById(10));
-		System.out.println(films.get(1));
-		films.get(2).addDirectorInFilm(personDao.findById(6));
-		System.out.println(films.get(2));
-		films.get(3).addDirectorInFilm(personDao.findById(9));
-		System.out.println(films.get(3));
-		films.get(4).addDirectorInFilm(personDao.findById(6));
-		System.out.println(films.get(4));
-		films.get(5).addDirectorInFilm(personDao.findById(11));
-		System.out.println(films.get(5));
-		films.get(5).addDirectorInFilm(personDao.findById(1));
-		System.out.println(films.get(5));
-		films.get(6).addDirectorInFilm(personDao.findById(10));
-		System.out.println(films.get(6));
-		films.get(7).addDirectorInFilm(personDao.findById(9));
-		System.out.println(films.get(7));
-		films.get(7).addDirectorInFilm(personDao.findById(11));
-		System.out.println(films.get(7));
-		films.get(8).addDirectorInFilm(personDao.findById(11));
-		System.out.println(films.get(8));
-		// filmDao.save(films);
-		System.out.println("salvando directores en pelis");
-	}
-
-	public void createActorsInFilms() {
-		List<Film> films = filmDao.findAll();
-		System.out.println("Estoy en createActorsInFilms");
-		System.out.println(films);
-		films.get(0).addActorInFilm(personDao.findById(2));
-		System.out.println(films.get(0));
-		films.get(0).addActorInFilm(personDao.findById(4));
-		System.out.println(films.get(0));
-		films.get(0).addActorInFilm(personDao.findById(3));
-		System.out.println(films.get(0));
-		/*
-		 * films.get(0).setDirectors(addActors(1, 2, 3));
-		 * films.get(1).setDirectors(addActors(3, 4, 5));
-		 * films.get(2).setDirectors(addActors(6, 7, 4));
-		 * films.get(3).setDirectors(addActors(3, 7, 5));
-		 * films.get(4).setDirectors(addActors(3, 4, 5));
-		 * films.get(5).setDirectors(addActors(4, 7, 6));
-		 * films.get(6).setDirectors(addActors(5, 7, 6));
-		 * films.get(7).setDirectors(addActors(3, 4, 5));
-		 * films.get(8).setDirectors(addActors(7, 4, 5));
-		 */
-		filmDao.save(films);
-	}
+	
 
 	public void deleteAll() {
 		genericService.deleteAll();
