@@ -22,14 +22,14 @@ public class Film {
 	private String argument;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Person> directors;
+	private List<Direction> directors;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Person> actors;
+	private List<Interpretation> actors;
 
 	public Film() {
-		this.directors = new ArrayList<Person>();
-		this.actors = new ArrayList<Person>();
+		this.directors = new ArrayList<Direction>();
+		this.actors = new ArrayList<Interpretation>();
 	}
 
 	public Film(String title, String country, int year, String argument) {
@@ -37,8 +37,8 @@ public class Film {
 		this.country = country;
 		this.year = year;
 		this.argument = argument;
-		this.directors = new ArrayList<Person>();
-		this.actors = new ArrayList<Person>();
+		this.directors = new ArrayList<Direction>();
+		this.actors = new ArrayList<Interpretation>();
 	}
 
 	public int getId() {
@@ -77,19 +77,19 @@ public class Film {
 		this.argument = argument;
 	}
 
-	public List<Person> getDirectors() {
+	public List<Direction> getDirectors() {
 		return directors;
 	}
 
-	public void setDirectors(List<Person> directors) {
+	public void setDirectors(List<Direction> directors) {
 		this.directors = directors;
 	}
 
-	public List<Person> getActors() {
+	public List<Interpretation> getActors() {
 		return actors;
 	}
 
-	public void setActors(List<Person> actors) {
+	public void setActors(List<Interpretation> actors) {
 		this.actors = actors;
 	}
 
@@ -139,13 +139,13 @@ public class Film {
 		return true;
 	}
 
-	public void addDirectorInFilm(Person direc) {
+	public void addDirectorInFilm(Direction direc) {
 		System.out.println(this.directors + "Estoy en addDirectorsInFilm");
 		this.directors.add(direc);
 		System.out.println(this.directors);
 	}
 
-	public void addActorInFilm(Person actor) {
+	public void addActorInFilm(Interpretation actor) {
 		System.out.println(this.actors + "Estoy en addActorsInFilm");
 		this.actors.add(actor);
 		System.out.println(this.actors);

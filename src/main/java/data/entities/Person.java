@@ -1,9 +1,11 @@
 package data.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Person {
@@ -15,6 +17,15 @@ public class Person {
 	private String name;
 	private String nationality;
 	private String birthdate;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn
+    private Direction director;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn
+	private Interpretation actor;
+	
 
 	public Person() {
 	}
@@ -25,7 +36,7 @@ public class Person {
 		this.nationality = nationality;
 		this.birthdate = birthdate;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -53,6 +64,22 @@ public class Person {
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
+	
+	public Direction getDirector() {
+		return director;
+	}
+
+	public void setDirector(Direction director) {
+		this.director = director;
+	}
+
+	public Interpretation getActor() {
+		return actor;
+	}
+
+	public void setActor(Interpretation actor) {
+		this.actor = actor;
+	}
 
 	@Override
 	public int hashCode() {
@@ -75,6 +102,16 @@ public class Person {
 			return false;
 		if (id != other.id)
 			return false;
+		if (actor == null) {
+			if (other.actor != null)
+				return false;
+		} else if (!actor.equals(other.actor))
+			return false;
+		if (director == null) {
+			if (other.director != null)
+				return false;
+		} else if (!director.equals(other.director))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -90,8 +127,8 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + name + ", nacionalidad=" + nationality + ", fecha de nacimiento="
-				+ birthdate + "]";
+		return "Person [id=" + id + ", name=" + name + ", nationality=" + nationality + ", birthdate=" + birthdate
+				+ ", idDirector=" + director + ", idActor=" + actor + "]";
 	}
 
 }
