@@ -167,48 +167,37 @@ public class DaosService {
 		Film[] films = new Film[9];
 		films[0] = new Film("Pearl Harbour", "EEUU", 2001, "argumento de la pelicula");
 		filmDao.save(films[0]);
-		System.out.println(films[0]);
 		themeUsedDao.save(new ThemeUsed(films[0], Theme.ACTION));
 		themeUsedDao.save(new ThemeUsed(films[0], Theme.ADVENTURE));
 		films[1] = new Film("Argo", "EEUU", 2012, "argumento de la pelicula");
 		filmDao.save(films[1]);
-		System.out.println(films[1]);
 		themeUsedDao.save(new ThemeUsed(films[1], Theme.ACTION));
 		themeUsedDao.save(new ThemeUsed(films[1], Theme.ADVENTURE));
 		films[2] = new Film("Altamira", "España", 2016, "argumento de la pelicula");
 		filmDao.save(films[2]);
-		System.out.println(films[2]);
 		themeUsedDao.save(new ThemeUsed(films[2], Theme.ADVENTURE));
 		films[3] = new Film("El camino de los ingleses", "EEUU", 2006, "argumento de la pelicula");
 		filmDao.save(films[3]);
-		System.out.println(films[3]);
 		themeUsedDao.save(new ThemeUsed(films[3], Theme.LOVE));
 		themeUsedDao.save(new ThemeUsed(films[3], Theme.ADVENTURE));
 		films[4] = new Film("A todo gas", "EEUU", 2001, "argumento de la pelicula");
 		filmDao.save(films[4]);
-		System.out.println(films[4]);
 		themeUsedDao.save(new ThemeUsed(films[4], Theme.ACTION));
 		films[5] = new Film("Alvin y las Ardillas", "EEUU", 2007, "argumento de la pelicula");
 		filmDao.save(films[5]);
-		System.out.println(films[5]);
 		themeUsedDao.save(new ThemeUsed(films[5], Theme.HUMOR));
 		films[6] = new Film("American Pie", "EEUU", 1999, "argumento de la pelicula");
 		filmDao.save(films[6]);
-		System.out.println(films[6]);
 		themeUsedDao.save(new ThemeUsed(films[6], Theme.HUMOR));
 		films[7] = new Film("Anastasia", "EEUU", 1997, "argumento de la pelicula");
 		filmDao.save(films[7]);
-		System.out.println(films[7]);
 		themeUsedDao.save(new ThemeUsed(films[7], Theme.HUMOR));
 		films[8] = new Film("Ahora me ves", "EEUU", 1997, "argumento de la pelicula");
 		filmDao.save(films[8]);
-		System.out.println(films[8]);
 		themeUsedDao.save(new ThemeUsed(films[8], Theme.TERROR));
 		themeUsedDao.save(new ThemeUsed(films[8], Theme.ACTION));
 		return films;
 	}
-
-	
 
 	public void deleteAll() {
 		genericService.deleteAll();

@@ -140,15 +140,11 @@ public class Film {
 	}
 
 	public void addDirectorInFilm(Direction direc) {
-		System.out.println(this.directors + "Estoy en addDirectorsInFilm");
 		this.directors.add(direc);
-		System.out.println(this.directors);
 	}
 
 	public void addActorInFilm(Interpretation actor) {
-		System.out.println(this.actors + "Estoy en addActorsInFilm");
 		this.actors.add(actor);
-		System.out.println(this.actors);
 	}
 
 	@Override
