@@ -70,7 +70,7 @@
 										</tbody>
 									</table>
 									<p>
-										<a href="<c:url value='/create-court'/>">Crear Pista</a>
+										<a href="<c:url value='/create-actor'/>">Crear actor</a>
 									</p>
 									<p>
 										<a href="<c:url value='/home'/>">Inicio</a>
