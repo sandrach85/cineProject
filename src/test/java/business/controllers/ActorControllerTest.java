@@ -33,6 +33,6 @@ public class ActorControllerTest {
     @Test
     public void testShowActor() {
     	List<Person> actorList = personDao.findActors();
-    	assertTrue(actorList.size() == actorController.showActor().size());
+    	assertTrue(actorList.size() == actorController.showActors().size());
     }
 }
