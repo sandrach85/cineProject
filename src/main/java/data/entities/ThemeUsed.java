@@ -1,8 +1,6 @@
 package data.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,8 +17,11 @@ public class ThemeUsed {
     @JoinColumn
     private Film film;
     
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn
     private Theme theme;
+    
+    public ThemeUsed(){}
 
 	public ThemeUsed(Film film, Theme theme) {
 		assert film != null && theme != null;

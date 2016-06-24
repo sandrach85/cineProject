@@ -19,8 +19,8 @@ public class PersonDaoITest {
 	@Autowired
 	private PersonDao personDao;
 
-	@Autowired
-	private DaosService daosService;
+	//@Autowired
+	//private DaosService daosService;
 
 	@Test
 	public void testFindById() {

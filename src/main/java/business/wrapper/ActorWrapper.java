@@ -27,7 +27,7 @@ public class ActorWrapper {
 		this.idPerson = person.getId();
 		this.name = person.getName();
 		this.nationality = person.getNationality();
-		this.idActor = person.getActor().getId();
+		//this.idActor = person.getActor().getId();
 	}
 
 	public int getId() {

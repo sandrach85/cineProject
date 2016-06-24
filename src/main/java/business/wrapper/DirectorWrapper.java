@@ -27,7 +27,7 @@ public class DirectorWrapper {
 		this.idPerson = person.getId();
 		this.name = person.getName();
 		this.nationality = person.getNationality();
-		this.idDirector = person.getDirector().getId();
+		//this.idDirector = person.getDirector().getId();
 	}
 
 	public int getIdPerson() {
