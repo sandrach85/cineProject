@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import data.entities.Interpretation;
 
-public interface InterpretationDao extends JpaRepository<Interpretation, Integer> {
-
+public interface InterpretationDao extends JpaRepository<Interpretation, Integer>, InterpretationExtended{
+	public Interpretation findById(int id);
 }

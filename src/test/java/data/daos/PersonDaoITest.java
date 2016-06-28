@@ -23,5 +23,6 @@ public class PersonDaoITest {
 	public void testFindById() {
 		Person person = personDao.findById(1);
 		assertEquals("Ben Affleck", person.getName());
+		
 	}
 }

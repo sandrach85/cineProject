@@ -9,5 +9,7 @@ public class Uris {
     public static final String ACTORS = "/actors";
     
     public static final String DIRECTORS = "/directors";
+    
+    public static final String ID = "/{id}";
 
 }
