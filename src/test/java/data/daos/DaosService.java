@@ -51,9 +51,11 @@ public class DaosService {
 		Person p1 = new Person("Ben Affleck", "EEUU", "15-08-1972");
 		Person p2 = new Person("Angelina Jolie", "EEUU", "04-06-1975");
 		Person p3 = new Person("Brad Pitt", "EEUU", "18-06-1963");
+		Person p4 = new Person("NName", "NCountry", "NDate");
 		personDao.save(p1);
 		personDao.save(p2);
 		personDao.save(p3);
+		personDao.save(p4);
 	}
 	
 	public void createFilms(){
@@ -67,8 +69,10 @@ public class DaosService {
 	public void createThemes(){
 		Theme t1 = new Theme("ACTION");
 		Theme t2 = new Theme("LOVE");
+		Theme t3 = new Theme("COMEDY");
 		themeDao.save(t1);
 		themeDao.save(t2);
+		themeDao.save(t3);
 	}
 	
 	public void createInterpretations(){
@@ -86,6 +90,10 @@ public class DaosService {
 		Film f1 = filmDao.findById(1);
 		Direction t1 = new Direction(p1,f1);
 		directionDao.save(t1);
+		Person p2 = personDao.findById(3);
+		Film f2 = filmDao.findById(2);
+		Direction t2 = new Direction(p2, f2);
+		directionDao.save(t2);
 	}
 	
 	public void createThemeUsedDao(){

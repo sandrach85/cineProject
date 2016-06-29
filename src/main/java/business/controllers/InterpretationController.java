@@ -38,6 +38,9 @@ public class InterpretationController {
 	}
 	public boolean updateInterpretation(int idInterpretation, InterpretationWrapper interpretationWrapper){
 		Interpretation interpretation = interpretationDao.findById(idInterpretation);
+		if(interpretation==null){
+			return false;
+		}
 		interpretation.setActor(interpretationWrapper.getActor());
 		interpretation.setFilm(interpretationWrapper.getFilm());
 		interpretationDao.save(interpretation);

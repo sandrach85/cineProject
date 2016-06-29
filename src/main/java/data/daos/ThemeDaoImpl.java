@@ -24,7 +24,8 @@ public class ThemeDaoImpl implements ThemeExtended {
 	@Override
 	public boolean removeTheme(Theme theme) {
 		if(existsTheme(theme)){
-			themeDao.delete(themeDao.findById(id));
+			Theme t = themeDao.findById(id);
+			themeDao.delete(t);
 			return true;
 		}
 		return false;
@@ -34,6 +35,7 @@ public class ThemeDaoImpl implements ThemeExtended {
 			for(int i=0; i<themes.size();i++){
 				if(themes.get(i).getName().equals(theme.getName())){
 					id = themes.get(i).getId();
+					System.out.println(id);
 					return true;
 				}
 		}

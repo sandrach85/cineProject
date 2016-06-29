@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import business.api.exceptions.NotFoundDirectionIdException;
 import business.controllers.DirectionController;
 import business.wrapper.DirectionWrapper;
 
@@ -29,14 +30,19 @@ public class DirectionResource {
 	}
 	
 	@RequestMapping(value = Uris.ID,method = RequestMethod.GET)
-	public DirectionWrapper showDirection(@PathVariable int id){
+	public DirectionWrapper showDirection(@PathVariable int id)throws NotFoundDirectionIdException{
 		DirectionWrapper direction = directionController.getDirection(id);
+		if(direction == null){
+			throw new NotFoundDirectionIdException("id: "+id);
+		}
 		return direction;
 	}
 	
 	@RequestMapping(value = Uris.ID ,method = RequestMethod.DELETE)
-    public void deleteDirection(@PathVariable int id) {
-		directionController.deleteDirection(id);
+    public void deleteDirection(@PathVariable int id) throws NotFoundDirectionIdException{
+		if(!directionController.deleteDirection(id)){
+			throw new NotFoundDirectionIdException("id: "+id);
+		}
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -45,7 +51,9 @@ public class DirectionResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public void updateTheme(@RequestBody DirectionWrapper direction){
-		directionController.updateDirection(direction.getId(), direction);
+	public void updateTheme(@RequestBody DirectionWrapper direction)throws NotFoundDirectionIdException{
+		if(!directionController.updateDirection(direction.getId(), direction)){
+			throw new NotFoundDirectionIdException("id: "+direction.getId());
+		}
 	}
 }

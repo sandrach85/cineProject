@@ -19,6 +19,7 @@ public class DirectionController {
 	}
 	
 	public boolean createDirection(DirectionWrapper directionWrapper){
+		assert(directionWrapper!=null);
 		Direction direction = new Direction();
 		direction.setDirector(directionWrapper.getDirector());
 		direction.setFilm(directionWrapper.getFilm());
@@ -37,6 +38,9 @@ public class DirectionController {
 	}
 	public boolean updateDirection(int idDirection, DirectionWrapper directionWrapper){
 		Direction direction = directionDao.findById(idDirection);
+		if(direction == null){
+			return false;
+		}
 		direction.setDirector(directionWrapper.getDirector());
 		direction.setFilm(directionWrapper.getFilm());
 		directionDao.save(direction);

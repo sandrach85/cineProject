@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import business.api.exceptions.NotFoundFilmIdException;
 import business.controllers.FilmController;
 import business.wrapper.FilmWrapper;
 
@@ -28,14 +29,19 @@ private FilmController filmController;
 	}
 	
 	@RequestMapping(value = Uris.ID,method = RequestMethod.GET)
-	public FilmWrapper showFilm(@PathVariable int id){
+	public FilmWrapper showFilm(@PathVariable int id)throws NotFoundFilmIdException{
 		FilmWrapper film = filmController.getFilm(id);
+		if(film == null){
+			throw new NotFoundFilmIdException("id: "+id);
+		}
 		return film;
 	}
 	
 	@RequestMapping(value = Uris.ID ,method = RequestMethod.DELETE)
-    public void deleteFilm(@PathVariable int id) {
-		filmController.deleteFilm(id);
+    public void deleteFilm(@PathVariable int id)throws NotFoundFilmIdException{
+		if(!filmController.deleteFilm(id)){
+			throw new NotFoundFilmIdException("id:" + id);
+		}
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -44,7 +50,9 @@ private FilmController filmController;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public void updateInterpretation(@RequestBody FilmWrapper film){
-		filmController.updateFilm(film.getId(), film);
+	public void updateInterpretation(@RequestBody FilmWrapper film)throws NotFoundFilmIdException{
+		if(!filmController.updateFilm(film.getId(), film)){
+			throw new NotFoundFilmIdException("id: "+film.getId());
+		}
 	}
 }

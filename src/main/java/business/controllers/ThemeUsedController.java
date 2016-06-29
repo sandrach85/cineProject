@@ -18,6 +18,7 @@ public class ThemeUsedController {
 	}
 	
 	public boolean createThemeUsed(ThemeUsedWrapper themeUsedWrapper){
+		assert(themeUsedWrapper!=null);
 		ThemeUsed themeUsed = new ThemeUsed();
 		themeUsed.setTheme(themeUsedWrapper.getTheme());
 		themeUsed.setFilm(themeUsedWrapper.getFilm());
@@ -36,6 +37,9 @@ public class ThemeUsedController {
 	}
 	public boolean updateThemeUsed(int idThemeUsed, ThemeUsedWrapper themeUsedWrapper){
 		ThemeUsed themeUsed = themeUsedDao.findById(idThemeUsed);
+		if(themeUsed==null){
+			return false;
+		}
 		themeUsed.setTheme(themeUsedWrapper.getTheme());
 		themeUsed.setFilm(themeUsedWrapper.getFilm());
 		themeUsedDao.save(themeUsed);

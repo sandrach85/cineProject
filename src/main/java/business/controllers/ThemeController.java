@@ -35,6 +35,9 @@ public class ThemeController {
 	}
 	public boolean updateTheme(int idTheme, ThemeWrapper themeWrapper){
 		Theme theme = themeDao.findById(idTheme);
+		if(theme==null){
+			return false;
+		}
 		theme.setName(themeWrapper.getName());
 		themeDao.save(theme);
 		return true;

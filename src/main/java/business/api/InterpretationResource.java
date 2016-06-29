@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import business.api.exceptions.NotFoundInterpretationIdException;
 import business.controllers.InterpretationController;
 import business.wrapper.InterpretationWrapper;
 
@@ -29,14 +30,19 @@ public class InterpretationResource {
 	}
 	
 	@RequestMapping(value = Uris.ID,method = RequestMethod.GET)
-	public InterpretationWrapper showInterpretation(@PathVariable int id){
+	public InterpretationWrapper showInterpretation(@PathVariable int id)throws NotFoundInterpretationIdException{
 		InterpretationWrapper interpretation = interpretationController.getInterpretation(id);
+		if(interpretation==null){
+			throw new NotFoundInterpretationIdException("id"+id);
+		}
 		return interpretation;
 	}
 	
 	@RequestMapping(value = Uris.ID ,method = RequestMethod.DELETE)
-    public void deleteInterpretation(@PathVariable int id) {
-        interpretationController.deleteInterpretation(id);
+    public void deleteInterpretation(@PathVariable int id)throws NotFoundInterpretationIdException{
+        if(!interpretationController.deleteInterpretation(id)){
+        	throw new NotFoundInterpretationIdException("id: "+id);
+        };
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -45,7 +51,9 @@ public class InterpretationResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public void updateInterpretation(@RequestBody InterpretationWrapper interpretation){
-		interpretationController.updateInterpretation(interpretation.getId(), interpretation);
+	public void updateInterpretation(@RequestBody InterpretationWrapper interpretation)throws NotFoundInterpretationIdException{
+		if(interpretationController.updateInterpretation(interpretation.getId(), interpretation)){
+			throw new NotFoundInterpretationIdException("id: "+interpretation.getId());
+		}
 	}
 }

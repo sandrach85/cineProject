@@ -35,11 +35,17 @@ public class FilmController {
 		return films;
 	}
 	public boolean deleteFilm(int filmId){
+		if(filmDao.findById(filmId)==null){
+			return false;
+		}
 		filmDao.delete(filmDao.findById(filmId));
 		return true;
 	}
 	public boolean updateFilm(int idfilm, FilmWrapper filmWrapper){
 		Film film = filmDao.findById(idfilm);
+		if(film == null){
+			return false;
+		}
 		film.setArgument(filmWrapper.getArgument());
 		film.setCountry(filmWrapper.getCountry());
 		film.setTitle(filmWrapper.getTitle());

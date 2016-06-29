@@ -25,7 +25,7 @@ public class PersonController {
 		personDao.save(person);
 		return true;
 	}
-	
+
 	public List<PersonWrapper> showPersons(){
 		List<PersonWrapper> persons = new ArrayList<PersonWrapper>();
 		for(Person person: personDao.findAll()){
@@ -34,11 +34,17 @@ public class PersonController {
 		return persons;
 	}
 	public boolean deletePerson(int personId){
+		if(personDao.findById(personId)==null){
+			return false;
+		}
 		personDao.delete(personDao.findById(personId));
 		return true;
 	}
 	public boolean updatePerson(int idPerson, PersonWrapper personWrapper){
 		Person person = personDao.findById(idPerson);
+		if(person==null){
+			return false;
+		}
 		person.setBirthdate(personWrapper.getBirthdate());
 		person.setName(personWrapper.getName());
 		person.setNationality(personWrapper.getNationality());

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import business.api.exceptions.NotFoundThemeIdException;
 import business.controllers.ThemeController;
 import business.wrapper.ThemeWrapper;
 
@@ -29,14 +30,19 @@ private ThemeController themeController;
 	}
 	
 	@RequestMapping(value = Uris.ID,method = RequestMethod.GET)
-	public ThemeWrapper showTheme(@PathVariable int id){
+	public ThemeWrapper showTheme(@PathVariable int id) throws NotFoundThemeIdException {
 		ThemeWrapper theme = themeController.getTheme(id);
+		if(theme==null){
+			throw new NotFoundThemeIdException("id: "+id);
+		}
 		return theme;
 	}
 	
 	@RequestMapping(value = Uris.ID ,method = RequestMethod.DELETE)
-    public void deleteTheme(@PathVariable int id) {
-		themeController.deleteTheme(id);
+    public void deleteTheme(@PathVariable int id)throws NotFoundThemeIdException {
+		if(!themeController.deleteTheme(id)){
+			throw new NotFoundThemeIdException("id: "+id);
+		}
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -45,7 +51,9 @@ private ThemeController themeController;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public void updateTheme(@RequestBody ThemeWrapper theme){
-		themeController.updateTheme(theme.getId(), theme);
+	public void updateTheme(@RequestBody ThemeWrapper theme)throws NotFoundThemeIdException {
+		if(!themeController.updateTheme(theme.getId(), theme)){
+			throw new NotFoundThemeIdException("id: "+theme.getId());
+		}
 	}
 }

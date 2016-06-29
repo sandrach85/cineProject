@@ -1,6 +1,6 @@
 package data.daos;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,43 +11,43 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
 import data.entities.Film;
-import data.entities.Interpretation;
-import data.entities.Person;
-
+import data.entities.Theme;
+import data.entities.ThemeUsed;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { PersistenceConfig.class, TestsPersistenceConfig.class })
 
-public class InterpretationDaoITest {
-	@Autowired
-	private InterpretationDao interpretationDao;
+public class ThemeUsedDaoITest {
 	
 	@Autowired
-	private PersonDao personDao;
+	private ThemeDao themeDao;
+	
+	@Autowired
+	private ThemeUsedDao themeUsedDao;
 	
 	@Autowired
 	private FilmDao filmDao;
 		
 	@Test
 	public void testAddInterpretation(){
-		int aux = interpretationDao.findAll().size();
-		Person person = personDao.findById(1);
+		int aux = themeUsedDao.findAll().size();
+		Theme theme = themeDao.findById(1);
 		Film film = filmDao.findById(2);
-		interpretationDao.addInterpretation(new Interpretation(person, film));
-		assertEquals(aux+1, interpretationDao.findAll().size());
+		themeUsedDao.addThemeUsed(new ThemeUsed(film, theme));
+		assertEquals(aux+1, themeUsedDao.findAll().size());
 	}
 	
 	@Test
 	public void testRemoveInterpretation(){
-		int aux = interpretationDao.findAll().size();
-		Person person = personDao.findById(1);
+		int aux = themeUsedDao.findAll().size();
+		Theme theme = themeDao.findById(1);
 		Film film = filmDao.findById(1);
-		interpretationDao.removeInterpretation(new Interpretation(person, film));
-		assertEquals(aux-1, interpretationDao.findAll().size());
+		themeUsedDao.removeThemeUsed(new ThemeUsed(film,theme));
+		assertEquals(aux-1, themeUsedDao.findAll().size());
 	}
 	
 	@Test
 	public void testFindById() {
-		Interpretation interpretation = interpretationDao.findById(2);
-		assertEquals(2, interpretation.getActor().getId());
+		ThemeUsed themeUsed = themeUsedDao.findById(2);
+		assertEquals(2, themeUsed.getFilm().getId());
 	}
 }

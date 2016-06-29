@@ -32,4 +32,9 @@ public class Theme {
 		return this.id;
 	}
 
+	@Override
+	public String toString() {
+		return "Theme [id=" + id + ", name=" + name + "]";
+	}
+	
 }

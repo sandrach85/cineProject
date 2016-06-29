@@ -10,18 +10,32 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
-import data.entities.Person;
+import data.entities.Theme;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { PersistenceConfig.class, TestsPersistenceConfig.class })
-public class PersonDaoITest {
 
+public class ThemeDaoITest {
 	@Autowired
-	private PersonDao personDao;
+	private ThemeDao themeDao;
+		
+	@Test
+	public void testAddInterpretation(){
+		int aux = themeDao.findAll().size();
+		themeDao.addTheme(new Theme("ADVENTURE"));
+		assertEquals(aux+1, themeDao.findAll().size());
+	}
+	
+	@Test
+	public void testRemoveInterpretation(){
+		int aux = themeDao.findAll().size();
+		themeDao.removeTheme(new Theme("COMEDY"));
+		assertEquals(aux-1, themeDao.findAll().size());
+	}
 	
 	@Test
 	public void testFindById() {
-		Person person = personDao.findById(1);
-		assertEquals("Ben Affleck", person.getName());
+		Theme theme = themeDao.findById(1);
+		assertEquals("ACTION", theme.getName());
 	}
 }

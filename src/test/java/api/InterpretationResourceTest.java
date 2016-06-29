@@ -29,6 +29,7 @@ import data.entities.Interpretation;
 import data.entities.Person;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
+
 public class InterpretationResourceTest {
 	
 	@Autowired
@@ -45,7 +46,7 @@ public class InterpretationResourceTest {
 		URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/Cine.Spring.0.0.1-SNAPSHOT").path(Uris.ACTORS).path("/1").build().encode().toUri();
 		RequestEntity<Object> requestEntity = new RequestEntity<>(HttpMethod.GET, uri);
 		InterpretationWrapper response = new RestTemplate().exchange(requestEntity, InterpretationWrapper.class).getBody();
-		response.toString();
+		assertTrue(response.getActor().getId()==1);
 	}
 	
 	@Test
@@ -53,12 +54,13 @@ public class InterpretationResourceTest {
 		URI uri = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/Cine.Spring.0.0.1-SNAPSHOT").path(Uris.ACTORS).build().encode().toUri();
 		RequestEntity<Object> requestEntity = new RequestEntity<>(HttpMethod.GET, uri);
 		List<InterpretationWrapper> response = Arrays.asList(new RestTemplate().exchange(requestEntity, InterpretationWrapper[].class).getBody());
-		System.out.println(response);
+		assertEquals(response.size(), interpretationDao.findAll().size());
 	}
 	
 	@Test
 	public void deleteInterpretationTest(){
 		new RestBuilder<Object>("http://localhost:8080/Cine.Spring.0.0.1-SNAPSHOT").path(Uris.ACTORS).pathId(1).delete().build();
+		assertNull(interpretationDao.findById(1));
 	}
 	
 	@Test
@@ -67,16 +69,17 @@ public class InterpretationResourceTest {
 		Film f1 = filmDao.findById(2);
 		InterpretationWrapper interpretation = new InterpretationWrapper(new Interpretation(p1,f1));
 		new RestBuilder<Object>("http://localhost:8080/Cine.Spring.0.0.1-SNAPSHOT").path(Uris.ACTORS).body(interpretation).post().build();
-		assertEquals(interpretationDao.findAll().size(), 3);
+		assertEquals(interpretationDao.findAll().size(), 2);
 	}
 	
 	@Test
 	public void updateInterpretationTest(){
-		Person p1 = personDao.findById(2);
+		Person p1 = personDao.findById(1);
 		Film f1 = filmDao.findById(2);
 		InterpretationWrapper interpretation = new InterpretationWrapper(new Interpretation(p1,f1));
 		interpretation.setId(2);
 		new RestBuilder<Object>("http://localhost:8080/Cine.Spring.0.0.1-SNAPSHOT").path(Uris.ACTORS).body(interpretation).put().build();
+		assertTrue(interpretationDao.findById(2).getActor().getId()==2);
 	}
 
 }

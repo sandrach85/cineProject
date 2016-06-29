@@ -10,18 +10,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
-import data.entities.Person;
+import data.entities.Film;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { PersistenceConfig.class, TestsPersistenceConfig.class })
-public class PersonDaoITest {
 
+public class FilmDaoITest {
 	@Autowired
-	private PersonDao personDao;
-	
+	private FilmDao filmDao;
 	@Test
 	public void testFindById() {
-		Person person = personDao.findById(1);
-		assertEquals("Ben Affleck", person.getName());
+		Film film = filmDao.findById(2);
+		assertEquals("Title", film.getTitle());
 	}
 }
