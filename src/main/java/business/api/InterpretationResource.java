@@ -13,6 +13,7 @@ import business.controllers.InterpretationController;
 import business.wrapper.InterpretationWrapper;
 
 @RestController
+
 @RequestMapping(Uris.ACTORS)
 public class InterpretationResource {
 	private InterpretationController interpretationController;

@@ -28,4 +28,8 @@ public class Theme {
 		this.name = name;
 	}
 
+	public int getId() {
+		return this.id;
+	}
+
 }

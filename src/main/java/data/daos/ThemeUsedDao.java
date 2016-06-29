@@ -4,5 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import data.entities.ThemeUsed;;
 
-public interface ThemeUsedDao extends JpaRepository<ThemeUsed, Integer> {
+public interface ThemeUsedDao extends JpaRepository<ThemeUsed, Integer>, ThemeUsedExtended {
+	public ThemeUsed findById(int id);
 }
