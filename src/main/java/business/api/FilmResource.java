@@ -16,18 +16,18 @@ import business.wrapper.FilmWrapper;
 @RestController
 @RequestMapping(Uris.FILMS)
 public class FilmResource {
-private FilmController filmController;
-	
+	private FilmController filmController;
+
 	@Autowired
 	public void setFilmController(FilmController filmController){
 		this.filmController = filmController;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public List<FilmWrapper> showFilms(){
 		return filmController.showFilms();
 	}
-	
+
 	@RequestMapping(value = Uris.ID,method = RequestMethod.GET)
 	public FilmWrapper showFilm(@PathVariable int id)throws NotFoundFilmIdException{
 		FilmWrapper film = filmController.getFilm(id);
@@ -36,19 +36,19 @@ private FilmController filmController;
 		}
 		return film;
 	}
-	
+
 	@RequestMapping(value = Uris.ID ,method = RequestMethod.DELETE)
-    public void deleteFilm(@PathVariable int id)throws NotFoundFilmIdException{
+	public void deleteFilm(@PathVariable int id)throws NotFoundFilmIdException{
 		if(!filmController.deleteFilm(id)){
 			throw new NotFoundFilmIdException("id:" + id);
 		}
-    }
-	
+	}
+
 	@RequestMapping(method = RequestMethod.POST)
 	public void createFilm(@RequestBody FilmWrapper film){
 		filmController.createFilm(film);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT)
 	public void updateInterpretation(@RequestBody FilmWrapper film)throws NotFoundFilmIdException{
 		if(!filmController.updateFilm(film.getId(), film)){
