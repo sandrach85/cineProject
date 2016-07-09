@@ -1,6 +1,5 @@
 package api;
 
-
 import static org.junit.Assert.*;
 
 import java.net.URI;
@@ -69,7 +68,7 @@ public class InterpretationResourceTest {
 		Film f1 = filmDao.findById(2);
 		InterpretationWrapper interpretation = new InterpretationWrapper(new Interpretation(p1,f1));
 		new RestBuilder<Object>("http://localhost:8080/Cine.Spring.0.0.1-SNAPSHOT").path(Uris.ACTORS).body(interpretation).post().build();
-		assertEquals(interpretationDao.findAll().size(), 2);
+		assertEquals(interpretationDao.findAll().size(), 3);
 	}
 	
 	@Test
